@@ -8,6 +8,68 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+const dog = {
+   species: 'Canis',
+   name: 'Jessie',
+   gender: 'female',
+   legs: '4',
+   hands: '0',
+   speech: 'woof-woof!',
+   friends: ['Stepan', 'Ivanka']
+};
+
+const cat = {
+   species: 'Felis catus',
+   name: 'Python',
+   gender: 'male',
+   legs: '4',
+   hands: '0',
+   speech: 'Meow',
+   friends: []
+};
+
+const woman = {
+   species: 'Homo sapiens',
+   name: 'Ivanka',
+   gender: 'female',
+   legs: '2',
+   hands: '2',
+   speech: 'Hello!',
+   friends: ['Stepan', 'Python', 'Jessie']
+};
+
+const man = {
+   species: 'Homo sapiens',
+   name: 'Stepan',
+   gender: 'male',
+   legs: '2',
+   hands: '2',
+   speech: 'Hello!',
+   friends: ['Ivanka', 'Python', 'Jessie']
+};
+
+const catWoman = {
+   species: 'Felis sapiens',
+   name: 'Selina',
+   gender: 'female',
+   legs: '2',
+   hands: '2',
+   speech: cat.speech,
+   friends: ['Stepan', 'Python']
+};
+
+const inhabitants = [cat, dog, woman, man, catWoman];
+
+const printObjectsValues = function(obj) {
+   obj.friends = obj.friends.join(', ') || '0';
+   let string = Object.values(obj).join('; ');
+   return string;
+}
+
+inhabitants.forEach((el) => print(printObjectsValues(el), 'div'));
+
+
+
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -27,5 +89,3 @@
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-
