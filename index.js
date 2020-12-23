@@ -1,8 +1,8 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
 
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
+   Code repository: https://github.com/AsyaYeromina/a-tiny-JS-world
+   Web app: https://asyayeromina.github.io/a-tiny-JS-world/.
    */
 
 // ======== OBJECTS DEFINITIONS ========
@@ -60,13 +60,13 @@ const catWoman = {
 
 const inhabitants = [cat, dog, woman, man, catWoman];
 
-const printObjectsValues = function(obj) {
+const getValues = function(obj) {
    obj.friends = obj.friends.join(', ') || '0';
-   let string = Object.values(obj).join('; ');
+   const string = Object.values(obj).join('; ');
    return string;
 }
 
-inhabitants.forEach((el) => print(printObjectsValues(el), 'div'));
+inhabitants.forEach(el => print(getValues(el), 'div'));
 
 
 
