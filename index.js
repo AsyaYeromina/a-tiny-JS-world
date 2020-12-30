@@ -9,40 +9,122 @@
 // Define your objects here
 
 class Inhabitant {
-  constructor(species, name, gender, legs, hands, speech, friends){
-    this.species = species;
-    this.name = name;
-    this.gender = gender;
-    this.legs = legs;
-    this.hands = hands;
-    this.speech = speech;
-    this.friends = friends;
+  constructor(inhabitantProperties) {
+    this.species = inhabitantProperties.species;
+    this.name = inhabitantProperties.name;
+    this.gender = inhabitantProperties.gender;
+    this.legs = inhabitantProperties.legs;
+    this.hands = inhabitantProperties.hands;
+    this.speech = inhabitantProperties.speech;
+    this.friends = inhabitantProperties.friends;
   }
 
-  makeString(){
-    return [this.species, this.name, this.gender, this.legs, this.hands, this.speech, this.friends]
-    .map(value => Array.isArray(value) ? value.join(", ") : value)
-    .join("; ")
+  toString() {
+    return [
+      this.species,
+      this.name,
+      this.gender,
+      this.legs,
+      this.hands,
+      this.speech,
+      this.friends,
+    ]
+      .filter((propertyValue) => propertyValue !== null)
+      .map((propertyValue) =>
+        Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
+      )
+      .join("; ");
   }
 }
 
 class Animal extends Inhabitant {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, legs: 4, hands: null });
+  }
+}
+
+class Canis extends Animal {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Canis", speech: "Woof-woof!" });
+  }
+}
+
+class FelisCatus extends Animal {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Felis catus", speech: "Meow" });
+  }
+
+  catSpeech() {
+    return this.speech;
+  }
 }
 
 class Sapiens extends Inhabitant {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, legs: 2, hands: 2 });
+  }
 }
 
+class HomoSapiens extends Sapiens {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Homo sapiens" });
+  }
+}
 
-const dog = new Animal('Canis', 'Jessie', 'female', '4', '0', 'Woof-woof!', ['Stepan', 'Ivanka']);
-const cat = new Animal('Felis catus', 'Python', 'male', '4', '0', 'Meow', []);
-const woman = new Sapiens('Homo sapiens', 'Ivanka', 'female', '2', '2', 'Hello!', ['Stepan', 'Python', 'Jessie']);
-const man = new Sapiens('Homo sapiens', 'Stepan', 'male', '2', '2', 'Hello!', ['Ivanka', 'Python', 'Jessie']);
-const catWoman = new Sapiens('Felis sapiens', 'Selina', 'female', '2', '2', cat.speech, ['Stepan', 'Python']);
+class FelisSapiens extends Sapiens {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Felis sapiens"});
+  }
+}
+
+class Woman extends HomoSapiens {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, gender: "female" });
+  }
+}
+
+class Man extends HomoSapiens {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, gender: "male" });
+  }
+}
+
+const dog = new Canis({
+  name: "Jessie",
+  gender: "female",
+  friends: ["Stepan", "Ivanka"],
+});
+
+const cat = new FelisCatus({
+  name: "Python",
+  gender: "male",
+  friends: [],
+});
+
+const woman = new Woman({
+  name: "Ivanka",
+  speech: "Hi!",
+  friends: ["Stepan", "Python", "Jessie"],
+});
+
+const man = new Man({
+  name: "Stepan",
+  speech: "Hello!",
+  friends: ["Ivanka", "Python", "Jessie"],
+});
+
+const catWoman = new FelisSapiens({
+  name: "Selina",
+  gender: "female",
+  speech: new FelisCatus({}).catSpeech(),
+  friends: ["Stepan", "Python"],
+});
+
 const inhabitantObjects = [dog, cat, woman, man, catWoman];
 
-  inhabitantObjects.map(inhabitant => {
-    print(inhabitant.makeString())
-})
+inhabitantObjects.map((inhabitant) => {
+  print(inhabitant, "h3");
+});
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
