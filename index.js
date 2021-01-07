@@ -17,6 +17,23 @@ class Inhabitant {
     this.speech = inhabitantProperties.speech;
     this.friends = inhabitantProperties.friends;
   }
+
+  toString() {
+    return [
+      "speech",
+      "name",
+      "friends",
+      "species",
+      "gender",
+      "legs",
+    ]
+      .map((propertyName) =>
+        Array.isArray(this[propertyName])
+        ? `${propertyName}: ${this[propertyName].join(", ")}`
+        : `${propertyName}: ${this[propertyName]}`
+      )
+      .join("; ");
+  }
 }
 
 class Animal extends Inhabitant {
@@ -26,26 +43,9 @@ class Animal extends Inhabitant {
   }
 
   toString() {
-    return [
-      this.species,
-      this.name,
-      this.gender,
-      this.legs,
-      this.hasTail,
-      this.speech,
-      this.friends,
-    ]
-    .map((propertyValue) =>
-    propertyValue == this.hasTail && propertyValue === true
-      ? (propertyValue = "has tail")
-      : propertyValue == this.hasTail && propertyValue === false
-      ? (propertyValue = "no tail")
-      : propertyValue
-    )
-    .map((propertyValue) =>
-      Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
-    )
-    .join("; ");
+    return [ super.toString(),
+      this.hasTail ? "has tail" : "no tail",]
+      .join("; ");
     }
 }
 
@@ -70,19 +70,9 @@ class Sapiens extends Inhabitant {
   }
 
   toString() {
-    return [
-      this.species,
-      this.name,
-      this.gender,
-      this.legs,
-      this.hands,
-      this.speech,
-      this.friends,
-    ]
-      .map((propertyValue) =>
-        Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
-      )
-      .join("; ");
+    return [ super.toString(),
+      `hands: ${this.hands}`,
+    ].join("; ");
   }
 }
 
